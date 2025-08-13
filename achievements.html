@@ -55,6 +55,10 @@
         </div>
     </section>
 
+<section id="photo-gallery" class="photo-gallery">
+  <!-- Photos will be loaded here -->
+</section>    
+
     <!-- Achievements Introduction -->
     <section class="achievements-intro">
         <div class="container">
@@ -377,6 +381,40 @@
     </footer>
 
     <script src="js/script.js"></script>
+<script>
+async function loadPhotos() {
+  const response = await fetch('content/photos/photos.csv');
+  const text = await response.text();
+
+  const rows = text.trim().split('\n').map(row => row.split(',').map(cell => cell.trim()));
+  const headers = rows.shift().map(h => h.toLowerCase());
+
+  let html = '<div class="photo-grid">';
+  rows.forEach(row => {
+    const data = {};
+    row.forEach((value, index) => {
+      data[headers[index]] = value || "";
+    });
+
+    if (data.image) {
+      html += `
+        <div class="photo-card">
+          <img src="${data.image}" alt="${data.title}">
+          <h3>${data.title || ''}</h3>
+          <p>${data.description || ''}</p>
+        </div>
+      `;
+    }
+  });
+  html += '</div>';
+
+  document.getElementById('photo-gallery').innerHTML = html;
+}
+
+loadPhotos();
+</script>
+
+    
 </body>
 
 </html>
