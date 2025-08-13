@@ -1,63 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Exam Results</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice Board - Iqra Public High School</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
-
-  <!-- Header -->
-  <header>
-    <h1>📢 Exam Results</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="result.html" class="active">Results</a>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/iqra_logo.png" alt="Iqra Public High School Logo" class="school-logo">
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="facilities.html" class="nav-link">Facilities</a>
+                </li>
+                <li class="nav-item">
+                    <a href="achievements.html" class="nav-link">Achievements</a>
+                </li>
+                <li class="nav-item">
+                    <a href="notice.html" class="nav-link active">Notice</a>
+                </li>
+                <li class="nav-item">
+                    <a href="campus.html" class="nav-link">Campus</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <!-- Main Content -->
-  <main>
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Notice Board</h1>
+            <p>Stay updated with the latest announcements, events, and important information</p>
+        </div>
+    </section>
+
+
+ <main>
     <section id="results" class="results-list">
       <!-- Results will be loaded here -->
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Student Portal</p>
-  </footer>
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Stay Connected</h2>
+                <p>Receive the latest notices and updates</p>
+                <a href="contact.html" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- Script -->
-  <script>
-    async function loadResults() {
-      try {
-        const response = await fetch('content/results/results.json');
-        const results = await response.json();
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Iqra Public High School</h3>
+                    <p>This is where character is shaped.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
 
-        // Sort newest first
-        results.sort((a, b) => new Date(b.date) - new Date(a.date));
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="facilities.html">Facilities</a></li>
+                        <li><a href="achievements.html">Achievements</a></li>
+                        <li><a href="notice.html">Notice Board</a></li>
+                        <li><a href="campus.html">Campus Life</a></li>
+                    </ul>
+                </div>
 
-        // Build HTML
-        const html = results.map(r => `
-          <article class="result-item">
-            <h2>${r.title}</h2>
-            <p class="date">${new Date(r.date).toLocaleDateString()}</p>
-            <p class="description">${r.description}</p>
-            <a href="${r.link}" target="_blank" class="view-link">📄 View Result</a>
-          </article>
-        `).join('');
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Mohadi Shivar, Jalgaon, (MH)</p>
+                        <p><i class="fas fa-phone"></i> +919960487622</p>
+                        <p><i class="fas fa-envelope"></i> info@iqraschool.edu</p>
+                        <p><i class="fas fa-clock"></i> Mon-Saturday: 11:00 AM - 4:00 PM</p>
+                    </div>
+                </div>
 
-        document.getElementById('results').innerHTML = html;
-      } catch (error) {
-        document.getElementById('results').innerHTML = '<p>⚠️ Failed to load results.</p>';
-        console.error('Error loading results:', error);
-      }
-    }
+                <!-- <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to our newsletter for updates and news.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div> -->
 
-    loadResults();
-  </script>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Iqra Public High School. All rights reserved.</p>
+                </div>
+            </div>
+    </footer>
 
+    <script src="js/script.js"></script>
+    <script>
+  async function loadResults() {
+    const response = await fetch('content/results/results.json'); // No "/" at start for GitHub Pages
+    const results = await response.json();
+
+    let html = '<ul>';
+    results.forEach(r => {
+      html += `
+        <li>
+          <strong>${r.title}</strong> (${new Date(r.date).toLocaleDateString()})<br>
+          <em>${r.description}</em><br>
+          <a href="${r.link}" target="_blank">📄 View Result</a>
+        </li>
+      `;
+    });
+    html += '</ul>';
+
+    document.getElementById('results').innerHTML = html;
+  }
+
+  loadResults();
+</script>
 </body>
+
 </html>
