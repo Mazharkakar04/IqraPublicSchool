@@ -115,28 +115,40 @@
     </footer>
 
     <script src="js/script.js"></script>
-    <script>
-  async function loadResults() {
-    const response = await fetch('content/results/results.json'); // No "/" at start for GitHub Pages
-    const results = await response.json();
+  <script>
+async function loadResults() {
+  const response = await fetch('content/results/results.csv');
+  const text = await response.text();
 
-    let html = '<ul>';
-    results.forEach(r => {
-      html += `
-        <li>
-          <strong>${r.title}</strong> (${new Date(r.date).toLocaleDateString()})<br>
-          <em>${r.description}</em><br>
-          <a href="${r.link}" target="_blank">📄 View Result</a>
-        </li>
-      `;
+  // Split into lines and remove empty ones
+  const rows = text.trim().split('\n').map(row => row.split(','));
+
+  // First row is headers
+  const headers = rows.shift();
+
+  let html = '<ul>';
+  rows.forEach(row => {
+    const data = {};
+    row.forEach((value, index) => {
+      data[headers[index]] = value;
     });
-    html += '</ul>';
 
-    document.getElementById('results').innerHTML = html;
-  }
+    html += `
+      <li>
+        <strong>${data.title}</strong> (${new Date(data.date).toLocaleDateString()})<br>
+        <em>${data.description}</em><br>
+        <a href="${data.link}" target="_blank">📄 View Result</a>
+      </li>
+    `;
+  });
+  html += '</ul>';
 
-  loadResults();
+  document.getElementById('results').innerHTML = html;
+}
+
+loadResults();
 </script>
+
 </body>
 
 </html>
