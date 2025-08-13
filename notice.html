@@ -115,7 +115,7 @@
     </footer>
 
     <script src="js/script.js"></script>
-  <script>
+ <script>
 async function loadResults() {
   const response = await fetch('content/results/results.csv');
   const text = await response.text();
@@ -135,7 +135,7 @@ async function loadResults() {
 
     html += `
       <li>
-        <strong>${data.title}</strong> (${new Date(data.date).toLocaleDateString()})<br>
+        <strong>${data.title}</strong> (${data.date})<br>
         <em>${data.description}</em><br>
         <a href="${data.link}" target="_blank">📄 View Result</a>
       </li>
@@ -148,6 +148,7 @@ async function loadResults() {
 
 loadResults();
 </script>
+
 
 </body>
 
