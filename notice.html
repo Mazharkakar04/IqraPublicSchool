@@ -115,29 +115,29 @@
     </footer>
 
     <script src="js/script.js"></script>
- <script>
+<script>
 async function loadResults() {
   const response = await fetch('content/results/results.csv');
   const text = await response.text();
 
   // Split into lines and remove empty ones
-  const rows = text.trim().split('\n').map(row => row.split(','));
+  const rows = text.trim().split('\n').map(row => row.split(',').map(cell => cell.trim()));
 
   // First row is headers
-  const headers = rows.shift();
+  const headers = rows.shift().map(h => h.toLowerCase());
 
   let html = '<ul>';
   rows.forEach(row => {
     const data = {};
     row.forEach((value, index) => {
-      data[headers[index]] = value;
+      data[headers[index]] = value || ""; // Default to empty string if missing
     });
 
     html += `
       <li>
-        <strong>${data.title}</strong> (${data.date})<br>
-        <em>${data.description}</em><br>
-        <a href="${data.link}" target="_blank">📄 View Result</a>
+        <strong>${data.title || 'No Title'}</strong> ${data.date ? `(${data.date})` : ''}<br>
+        <em>${data.description || ''}</em><br>
+        ${data.link ? `<a href="${data.link}" target="_blank">📄 View Result</a>` : ''}
       </li>
     `;
   });
@@ -148,6 +148,7 @@ async function loadResults() {
 
 loadResults();
 </script>
+
 
 
 </body>
